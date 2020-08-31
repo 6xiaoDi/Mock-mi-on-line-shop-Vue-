@@ -4,6 +4,26 @@
     </div>
 </template>
 
+<script>
+    import storage from './storage/index'
+    export  default {
+    	name: 'app',
+        components: {
+
+        },
+        data() {
+    		return {}
+        },
+        mounted() {
+    		// storage.setItem('a',1);
+    		// storage.setItem('user', {a: 2});
+    		// storage.setItem('ad', {a: 123}, 'user');
+            // storage.clear('a')
+            // storage.clear('a', 'user')
+        }
+    }
+</script>
+
 <style>
     #app {
         font-family: Avenir, Helvetica, Arial, sans-serif;
