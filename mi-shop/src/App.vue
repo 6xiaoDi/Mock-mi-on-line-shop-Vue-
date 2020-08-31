@@ -5,21 +5,20 @@
 </template>
 
 <script>
-    import storage from './storage/index'
     export  default {
     	name: 'app',
         components: {
 
         },
         data() {
-    		return {}
+    		return {
+    			res:{}
+            }
         },
         mounted() {
-    		// storage.setItem('a',1);
-    		// storage.setItem('user', {a: 2});
-    		// storage.setItem('ad', {a: 123}, 'user');
-            // storage.clear('a')
-            // storage.clear('a', 'user')
+    		this.axios.get('/mock/user/login.json').then((res) => {
+                this.res = res;
+    		});
         }
     }
 </script>
