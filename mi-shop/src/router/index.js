@@ -9,6 +9,7 @@ import Order from '../views/order'
 import OrderList from '../views/orderList'
 import OrderConfirm from  '../views/orderConfirm'
 import OrderPay from "../views/orderPay";
+import Alipay from "../views/aliPay"
 
 Vue.use(VueRouter) // 加载插件
 
@@ -20,15 +21,15 @@ const routes = [
         redirect:'/index',
         children: [
             {
-                path: '/index',
+                path: 'index',
                 name: 'index',
                 component: Index
             }, {
-                path: '/product/:id',
+                path: 'product/:id',
                 name: 'product',
                 component: Product
             }, {
-                path: '/detail/:id',
+                path: 'detail/:id',
                 name: 'detail',
                 component: Detail
             },
@@ -45,17 +46,21 @@ const routes = [
         component: Order,
         children: [
             {
-                path: '/list',
+                path: 'list',
                 name: 'order-list',
                 component: OrderList
             }, {
-                path: '/confirm',
+                path: 'confirm',
                 name: 'order-confirm',
                 component: OrderConfirm
             }, {
-                path: '/pay',
+                path: 'pay',
                 name: 'order-pay',
                 component: OrderPay
+            }, {
+                path: 'alipay',
+                name: 'alipay',
+                component: Alipay
             }
         ]
     }
