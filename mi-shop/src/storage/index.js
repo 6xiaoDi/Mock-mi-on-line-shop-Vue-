@@ -49,19 +49,24 @@ export default {
 	getStorage(){
 		return JSON.parse( window.sessionStorage.getItem(STORAGE_key) || {});
 	},
+
 	/**
 	 * 清除STORAGE_key对应的JSON属性
 	 * @param key
 	 * @param module_name
+	 * @returns {boolean}
 	 */
 	clear(key, module_name){
 		let val = this.getStorage();
-		if (module_name) {
+		if (module_name ) {
+			if (!val[module_name]) return false;
 			delete val[module_name][key];
 		}else{
+			if (!val[key]) return false;
 			delete val[key];
 		}
 		this.save(val);
+		return true;
 	},
 	/**
 	 * 将val存入STORAGE_key的value
