@@ -38,7 +38,12 @@
                         <div class="children"></div>
                     </div>
                 </div>
-                <div class="header-search"></div>
+                <div class="header-search">
+                    <div class="wrapper">
+                        <input type="text" name="keyword">
+                        <a href="javascript:;"></a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -52,6 +57,7 @@
 
 <style lang="scss" scoped>
     @import "./../assets/scss/base.scss";
+    @import "./../assets/scss/mixin.scss";
     .header{
         .nav-topbar{
             height: 39px;
@@ -59,11 +65,7 @@
             background-color: #333;
             color: #B0B0B0;
             .container {
-                display: flex;
-                /*水平方向两边对齐*/
-                justify-content: space-between;
-                /*垂直方向居中*/
-                align-content: center;
+                @include flex();
                 a{
                     display: inline-block;
                     color: #B0B0B0;
@@ -76,11 +78,7 @@
                     text-align: center;
                     color: #ffffff;
                     .icon-cart{
-                        display: inline-block;
-                        width: 16px;
-                        height: 12px;
-                        background: url("/imgs/icon-cart-checked.png") no-repeat center;
-                        background-size: contain;
+                        @include bgImg(16px,12px,"/imgs/icon-cart-checked.png");
                         margin-right: 4px;
                     }
                 }
@@ -89,9 +87,7 @@
         .nav-header{
             .container{
                 height: 112px;
-                display: flex;
-                justify-content: space-between;
-                align-content: center;
+                @include flex();
                 .header-logo{
                     display: inline-block;
                     width: 55px;
@@ -105,21 +101,13 @@
                         /*  scss生成伪类  */
                         &:before{
                             content: "";
-                            display: inline-block;
-                            width: 55px;
-                            height: 55px;
-                            background: url("/imgs/mi-logo.png") no-repeat center;
-                            background-size: contain;
+                            @include bgImg(55px,55px,"/imgs/mi-logo.png");
                             transition: margin .2s;
                         }
                         &:after{
                             /*content是占位的，必须加*/
                             content: "";
-                            display: inline-block;
-                            width: 55px;
-                            height: 55px;
-                            background: url("/imgs/mi-home.png") no-repeat center;
-                            background-size: contain;
+                            @include bgImg(55px,55px,"/imgs/mi-home.png");
                         }
                         &:hover:before{
                             margin-left: -55px;
@@ -130,7 +118,7 @@
                 }
                 .header-menu{
                     display: inline-block;
-                    width: 200px;
+                    width: 643px;
                     padding-left: 209px;
                     .item-menu{
                         display: inline-block;
@@ -138,11 +126,34 @@
                         font-weight: bold;
                         font-size: 16px;
                         line-height: 112px;
+                        margin-right: 20px;
                         span{
                             cursor: pointer;
                         }
                         &:hover{
                             /*展示子菜单*/
+                        }
+                    }
+                }
+                .header-search{
+                    width: 319px;
+                    .wrapper{
+                        height: 50px;
+                        border: 1px solid #E0E0E0;
+                        display: flex;
+                        /*垂直居中*/
+                        align-items: center;
+                        input{
+                            border:none;
+                            box-sizing: border-box;
+                            border-right:1px solid #E0E0E0;
+                            width: 264px;
+                            height: 50px;
+                            padding-left: 14px;
+                        }
+                        a{
+                            @include bgImg(18px,18px,"/imgs/icon-search.png");
+                            margin-left: 17px;
                         }
                     }
                 }
