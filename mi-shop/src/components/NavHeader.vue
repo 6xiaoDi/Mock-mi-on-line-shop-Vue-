@@ -27,7 +27,70 @@
                     <!--多个下拉区域菜单，因此不要用a，而是div-->
                     <div class="item-menu">
                         <span>小米手机</span>
-                        <div class="children"></div>
+                        <div class="children">
+                            <ul>
+                                <li class="product">
+                                    <!-- 在新窗口打开 -->
+                                    <a href="" target="_blank">
+                                        <div class="pro-img">
+                                            <img src="//cdn.cnbj1.fds.api.mi-img.com/mi-mall/b11742a0be47f9d97bb6a13ea580018d.png?thumb=1&amp;w=200&amp;h=138&amp;f=webp&amp;q=90" alt="小米10至尊纪念版" >
+                                        </div>
+                                        <div class="pro-name">小米10至尊纪念版</div>
+                                        <div class="pro-price">5299元起</div>
+                                    </a>
+                                </li>
+                                <li class="product">
+                                    <!-- 在新窗口打开 -->
+                                    <a href="" target="_blank">
+                                        <div class="pro-img">
+                                            <img src="//cdn.cnbj1.fds.api.mi-img.com/mi-mall/b11742a0be47f9d97bb6a13ea580018d.png?thumb=1&amp;w=200&amp;h=138&amp;f=webp&amp;q=90" alt="小米10至尊纪念版" >
+                                        </div>
+                                        <div class="pro-name">小米10至尊纪念版</div>
+                                        <div class="pro-price">5299元起</div>
+                                    </a>
+                                </li>
+                                <li class="product">
+                                    <!-- 在新窗口打开 -->
+                                    <a href="" target="_blank">
+                                        <div class="pro-img">
+                                            <img src="//cdn.cnbj1.fds.api.mi-img.com/mi-mall/b11742a0be47f9d97bb6a13ea580018d.png?thumb=1&amp;w=200&amp;h=138&amp;f=webp&amp;q=90" alt="小米10至尊纪念版" >
+                                        </div>
+                                        <div class="pro-name">小米10至尊纪念版</div>
+                                        <div class="pro-price">5299元起</div>
+                                    </a>
+                                </li>
+                                <li class="product">
+                                    <!-- 在新窗口打开 -->
+                                    <a href="" target="_blank">
+                                        <div class="pro-img">
+                                            <img src="//cdn.cnbj1.fds.api.mi-img.com/mi-mall/b11742a0be47f9d97bb6a13ea580018d.png?thumb=1&amp;w=200&amp;h=138&amp;f=webp&amp;q=90" alt="小米10至尊纪念版" >
+                                        </div>
+                                        <div class="pro-name">小米10至尊纪念版</div>
+                                        <div class="pro-price">5299元起</div>
+                                    </a>
+                                </li>
+                                <li class="product">
+                                    <!-- 在新窗口打开 -->
+                                    <a href="" target="_blank">
+                                        <div class="pro-img">
+                                            <img src="//cdn.cnbj1.fds.api.mi-img.com/mi-mall/b11742a0be47f9d97bb6a13ea580018d.png?thumb=1&amp;w=200&amp;h=138&amp;f=webp&amp;q=90" alt="小米10至尊纪念版" >
+                                        </div>
+                                        <div class="pro-name">小米10至尊纪念版</div>
+                                        <div class="pro-price">5299元起</div>
+                                    </a>
+                                </li>
+                                <li class="product">
+                                    <!-- 在新窗口打开 -->
+                                    <a href="" target="_blank">
+                                        <div class="pro-img">
+                                            <img src="//cdn.cnbj1.fds.api.mi-img.com/mi-mall/b11742a0be47f9d97bb6a13ea580018d.png?thumb=1&amp;w=200&amp;h=138&amp;f=webp&amp;q=90" alt="小米10至尊纪念版" >
+                                        </div>
+                                        <div class="pro-name">小米10至尊纪念版</div>
+                                        <div class="pro-price">5299元起</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="item-menu">
                         <span>Redmi 红米</span>
@@ -58,6 +121,7 @@
 <style lang="scss" scoped>
     @import "./../assets/scss/base.scss";
     @import "./../assets/scss/mixin.scss";
+    @import "./../assets/scss/config.scss";
     .header{
         .nav-topbar{
             height: 39px;
@@ -86,6 +150,8 @@
         }
         .nav-header{
             .container{
+                /*为了children下拉菜单相对于.container定位*/
+                position: relative;
                 height: 112px;
                 @include flex();
                 .header-logo{
@@ -132,6 +198,69 @@
                         }
                         &:hover{
                             /*展示子菜单*/
+                            color: $colorA;
+                            .children{
+                                height: 220px;
+                            }
+                        }
+                        .children{
+                            position: absolute;
+                            top: 112px;
+                            left: 0;
+                            width: 1226px;
+                            border-top: 1px solid #e5e5e5;
+                            /*设置阴影部分*/
+                            box-shadow: 0px  7px  6px 0px rgba(0, 0, 0, 0.11);
+                            /*覆盖背后的颜色，防止层级关系被遮盖*/
+                            height: 220px;
+                            z-index: 10;
+                            /*background-color: #ffffff;*/
+                            .product{
+                                /* 下拉菜单右侧线条相对于product定位 */
+                                position: relative;
+                                float: left;
+                                /*100%  /  6 ，每个product各占6份*/
+                                width: 16.6%;
+                                height: 220px;
+                                font-size: 12px;
+                                line-height: 12px;
+                                text-align: center;
+                                a{
+                                    /*a里嵌套的div是块级的，a是行内的，a是撑不开的，因此转成行内块*/
+                                    display: inline-block;
+                                }
+                                img{
+                                    width: auto;
+                                    height: 111px;
+                                    margin-top: 26px;
+                                }
+                                .pro-img{
+                                    height: 137px;
+                                }
+                                .pro-name{
+                                    font-weight: bold;
+                                    margin-top: 19px;
+                                    margin-bottom: 8px;
+                                    color: $colorB;
+                                }
+                                .pro-price{
+                                    color: $colorA;
+                                }
+                                /* 下拉菜单右侧线条 */
+                                &:before{
+                                    content: '';
+                                    position: absolute;
+                                    top: 28px;
+                                    right: 0;
+                                    border-left: 1px solid $colorF;
+                                    height: 100px;
+                                    width: 1px;
+                                }
+                                /*去掉最后一根线*/
+                                &:last-child:before{
+                                    display: none;
+                                }
+                            }
                         }
                     }
                 }
