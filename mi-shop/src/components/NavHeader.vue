@@ -146,13 +146,14 @@
         		this.axios.get('/products', {
         			params:{
         				categoryId:'100012',
-                        //pageSize:6 // 一次只接受6条数据，但是采用另外一种方式，自行获取前6条数据
+                        pageSize:6 // 一次只接受6条数据，但是采用另外一种方式，自行获取前6条数据
                     }
                 }).then((res) => {
                 	// 超过6条数据则进行截取
-                	if (res.list.length >= 6) {
-                		this.phoneList = res.list.slice(0, 6);
-                    }
+                	// if (res.list.length >= 6) {
+                	// 	this.phoneList = res.list.slice(0, 6);
+                    // }
+			        this.phoneList = res.list;
                 })
             },
             goToCart(){
@@ -162,7 +163,7 @@
     }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
     @import "./../assets/scss/base.scss";
     @import "./../assets/scss/mixin.scss";
     @import "./../assets/scss/config.scss";
@@ -264,7 +265,7 @@
                             /*覆盖背后的颜色，防止层级关系被遮盖*/
                             /*height: 220px;*/
                             z-index: 10;
-                            /*background-color: #ffffff;*/
+                            background-color: #ffffff;
                             transition: height;
                             .product{
                                 /* 下拉菜单右侧线条相对于product定位 */

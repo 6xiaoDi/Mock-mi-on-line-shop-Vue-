@@ -23,7 +23,7 @@
     }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
     .footer{
         height: 234px;
         border-top: 4px solid #FF6600;
