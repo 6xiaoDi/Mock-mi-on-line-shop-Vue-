@@ -62,6 +62,31 @@
                 </a>
             </div>
         </div>
+        <div class="product-box">
+            <div class="container">
+                <h2>手机</h2>
+                <div class="wrapper">
+                    <div class="banner-left">
+                        <a href="/#/product/35"><img :src="'/imgs/mix-alpha.jpg'" alt=""></a>
+                    </div>
+                    <div class="list-box">
+                        <div class="list" v-for="(arr,i) in phoneList" :key="i">
+                            <div class="item" v-for="(item,j) in arr" :key="j">
+                                <span>新品</span>
+                                <div class="item-img">
+                                    <img :src="'/imgs/mi10.jpg'" alt="">
+                                </div>
+                                <div class="item-info">
+                                    <h3>小米9</h3>
+                                    <p>5G双卡全网通，骁龙855</p>
+                                    <p class="price">3999元</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <ServiceBar></ServiceBar>
     </div>
 </template>
@@ -127,7 +152,7 @@
 		                img:'/imgs/slider/slide-5.jpg'
 	                }
                 ],
-                // 二维数组
+                // 主导航右侧弹框商品列表（二维数组）
                 menuList:[
 	                [
 		                {
@@ -167,6 +192,8 @@
 						img:'/imgs/ads/ads-4.jpg'
 					}
 				],
+                // 首页手机列表（二维数组）
+				phoneList:[[1,1,1,1],[1,1,1,1]],
             }
         }
 	}
@@ -269,6 +296,83 @@
         }
         .banner{
             margin-bottom: 50px;
+        }
+        .product-box{
+            background-color: $colorJ;
+            padding: 30px 0 50px;
+            h2{
+                font-size: $fontF;
+                height: 21px;
+                line-height: 21px;
+                color: $colorB;
+                margin-bottom: 20px;
+            }
+            .wrapper{
+                display:flex;
+                .banner-left{
+                    margin-right:16px;
+                    img{
+                        width:224px;
+                        height:619px;
+                    }
+                }
+            }
+            .list-box{
+                .list{
+                    @include flex();
+                    width: 986px;
+                    margin-bottom: 14px;
+                    /*两行元素，最后一行没有底部外边距*/
+                    &:last-child{
+                        margin-bottom: 0;
+                    }
+                    .item{
+                        width:236px;
+                        height:302px;
+                        background-color:$colorG;
+                        text-align:center;
+                        /*如：新品标记*/
+                        span{
+
+                        }
+                    }
+                    .item-img{
+                        img{
+                            width:100%;
+                            height:195px;
+                        }
+                    }
+                    .item-info{
+                        /*商品名称*/
+                        h3{
+                            font-size:$fontJ;
+                            color:$colorB;
+                            line-height:$fontJ;
+                            font-weight:bold;
+                        }
+                        /*商品描述*/
+                        p{
+                            color:$colorD;
+                            line-height:13px;
+                            margin:6px auto 13px;
+                        }
+                        /*商品价格*/
+                        .price{
+                            color:#F20A0A;
+                            font-size:$fontJ;
+                            font-weight:bold;
+                            /*变小手，可以点击购物车加购物车*/
+                            cursor:pointer;
+                            &:after{
+                                @include bgImg(22px,22px,'/imgs/icon-cart-hover.png');
+                                content:' ';
+                                margin-left:5px;
+                                vertical-align: middle;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 </style>
