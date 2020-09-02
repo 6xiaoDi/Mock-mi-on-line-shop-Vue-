@@ -51,8 +51,16 @@
                     <div class="swiper-button-next" slot="button-next"></div>
                 </swiper>
             </div>
-            <div class="ads-box"></div>
-            <div class="product-box"></div>
+            <div class="ads-box">
+                <a :href="'/#/product/'+item.id" v-for="(item,index) in adsList" :key="index">
+                    <img :src="item.img" alt="">
+                </a>
+            </div>
+            <div class="banner">
+                <a href="/#/product/30">
+                    <img :src="'/imgs/banner-1.png'" alt="">
+                </a>
+            </div>
         </div>
         <ServiceBar></ServiceBar>
     </div>
@@ -142,7 +150,23 @@
 	                ],
                     // 后面的就不实现了，直接写死
 	                [0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]
-                ]
+                ],
+                // 广告列表
+				adsList:[
+					{
+						id:33,
+						img:'/imgs/ads/ads-1.jpg'
+					},{
+						id:48,
+						img:'/imgs/ads/ads-2.jpg'
+					},{
+						id:45,
+						img:'/imgs/ads/ads-3.jpg'
+					},{
+						id:47,
+						img:'/imgs/ads/ads-4.jpg'
+					}
+				],
             }
         }
 	}
@@ -233,6 +257,18 @@
                     height: 100%;
                 }
             }
+        }
+        .ads-box{
+            @include flex();
+            margin-top: 14px;
+            margin-bottom: 31px;
+            a{
+                width: 296px;
+                height: 167px;
+            }
+        }
+        .banner{
+            margin-bottom: 50px;
         }
     }
 </style>

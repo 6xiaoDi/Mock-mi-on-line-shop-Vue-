@@ -37,7 +37,7 @@
                                             <img :src="item.mainImage" :alt="item.subtitle" >
                                         </div>
                                         <div class="pro-name">{{item.name}}</div>
-                                        <div class="pro-price">{{item.price | currency}}</div>
+                                        <div class="pro-price">{{ item.price | currency }}</div>
                                     </a>
                                 </li>
                             </ul>
@@ -129,12 +129,6 @@
                 phoneList:[]
             }
         },
-        filter: {
-        	currency(val){
-                if (!val) return '0.00';
-                return '￥' + val.toFixed(2) + '元';
-            }
-        },
 	    mounted() {
             this.getProductList();
         },
@@ -159,7 +153,13 @@
             goToCart(){
         		this.$router.push('/cart');
             }
-        }
+        },
+	    filters: {
+		    currency: function(val){
+                        if (!val) return '0.00';
+                        return '￥' + val.toFixed(2) + '元';
+                    }
+	    }
     }
 </script>
 
