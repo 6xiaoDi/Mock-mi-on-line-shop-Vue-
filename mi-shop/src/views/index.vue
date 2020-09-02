@@ -8,7 +8,14 @@
                             <!-- 菜单导航是移动上去触发，不涉及点击事件 -->
                             <a href="javascript:;">手机 电话卡</a>
                             <div class="children">
-
+                                <ul v-for="(item,i) in menuList" :key="i">
+                                    <li v-for="(sub,j) in item" :key="j">
+                                        <a :href="sub ? '/#/product/'+ sub.id : '' ">
+                                            <img :src="sub ? sub.img : '/imgs/item-1.png'" alt="小米10至尊纪念版">
+                                            {{sub ? sub.name : '小米10至尊纪念版'}}}
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         </li>
                         <li class="menu-item">
@@ -111,6 +118,30 @@
 		                id:'',
 		                img:'/imgs/slider/slide-5.jpg'
 	                }
+                ],
+                // 二维数组
+                menuList:[
+	                [
+		                {
+			                id:30,
+			                img:'/imgs/item-box-1.png',
+			                name:'小米CC9',
+		                },{
+                            id:31,
+                            img:'/imgs/item-box-2.png',
+                            name:'小米8青春版',
+	                    },{
+                            id:32,
+                            img:'/imgs/item-box-3.jpg',
+                            name:'Redmi K20 Pro',
+                        },{
+                            id:33,
+                            img:'/imgs/item-box-4.jpg',
+                            name:'移动4G专区',
+                        }
+	                ],
+                    // 后面的就不实现了，直接写死
+	                [0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]
                 ]
             }
         }
@@ -154,6 +185,40 @@
                         }
                         &:hover{
                             background-color: $colorA;
+                            .children{
+                                display: block;
+                            }
+                        }
+                        .children{
+                            display: none;
+                            width: 962px;
+                            height: 451px;
+                            background-color: $colorG;
+                            position: absolute;
+                            top: 0;
+                            left: 264px;
+                            border: 1px solid $colorH;
+                            ul{
+                                display: flex;
+                                justify-content: space-between;
+                                height: 75px;
+                                li{
+                                    height: 75px;
+                                    line-height: 75px;
+                                    flex: 1;
+                                    padding-left: 23px;
+                                }
+                                a{
+                                    color: $colorB;
+                                    font-size: 14px;
+                                }
+                                img{
+                                    width: 42px;
+                                    height: 35px;
+                                    vertical-align: middle;
+                                    margin-right: 15px;
+                                }
+                            }
                         }
                     }
                 }
