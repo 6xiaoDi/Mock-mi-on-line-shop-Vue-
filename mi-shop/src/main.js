@@ -13,9 +13,9 @@ if (mock) {
 
 // 根据前端的跨域方式做调整（接口代理：接口域名和前端域名一样，jsonp和CROS，需要设置成http形式）
 // 这里是代理方式，如'/api/getUsr'  =>  转发后前缀被干掉'/getUsr'
-// axios.defaults.baseURL = '/api';
+axios.defaults.baseURL = '/api';
 // easy-mock 对应 url
-axios.defaults.baseURL = ' https://www.easy-mock.com/mock/5f4d0651b52a25318ce1f205/mock';
+// axios.defaults.baseURL = ' https://www.easy-mock.com/mock/5f4d0651b52a25318ce1f205/mock';
 axios.defaults.timeout = 8000; // 不设置的话，体验很差
 
 // 根据环境变量设置不同的请求地址

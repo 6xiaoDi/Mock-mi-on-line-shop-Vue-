@@ -9,9 +9,10 @@
                     <a href="javascript:">金融</a>
                 </div>
                 <div class="topbar-user">
-                    <a href="javascript:">登录</a>
-                    <a href="javascript:">注册</a>
-                    <a href="javascript:" class="my-cart">
+                    <a href="javascript:" v-if="username">{{username}}</a>
+                    <a href="javascript:" v-if="!username" @click="login()">登录</a>
+                    <a href="javascript:" v-if="username">我的订单</a>
+                    <a href="javascript:" class="my-cart" @click="goToCart()">
                         <span class="icon-cart"></span>
                         购物车
                     </a>
@@ -29,64 +30,14 @@
                         <span>小米手机</span>
                         <div class="children">
                             <ul>
-                                <li class="product">
+                                <li class="product" v-for="item in phoneList" :key="item.id">
                                     <!-- 在新窗口打开 -->
-                                    <a href="" target="_blank">
+                                    <a :href="'/#/product' + item.id" target="_blank">
                                         <div class="pro-img">
-                                            <img src="//cdn.cnbj1.fds.api.mi-img.com/mi-mall/b11742a0be47f9d97bb6a13ea580018d.png?thumb=1&amp;w=200&amp;h=138&amp;f=webp&amp;q=90" alt="小米10至尊纪念版" >
+                                            <img :src="item.mainImage" :alt="item.subtitle" >
                                         </div>
-                                        <div class="pro-name">小米10至尊纪念版</div>
-                                        <div class="pro-price">5299元起</div>
-                                    </a>
-                                </li>
-                                <li class="product">
-                                    <!-- 在新窗口打开 -->
-                                    <a href="" target="_blank">
-                                        <div class="pro-img">
-                                            <img src="//cdn.cnbj1.fds.api.mi-img.com/mi-mall/b11742a0be47f9d97bb6a13ea580018d.png?thumb=1&amp;w=200&amp;h=138&amp;f=webp&amp;q=90" alt="小米10至尊纪念版" >
-                                        </div>
-                                        <div class="pro-name">小米10至尊纪念版</div>
-                                        <div class="pro-price">5299元起</div>
-                                    </a>
-                                </li>
-                                <li class="product">
-                                    <!-- 在新窗口打开 -->
-                                    <a href="" target="_blank">
-                                        <div class="pro-img">
-                                            <img src="//cdn.cnbj1.fds.api.mi-img.com/mi-mall/b11742a0be47f9d97bb6a13ea580018d.png?thumb=1&amp;w=200&amp;h=138&amp;f=webp&amp;q=90" alt="小米10至尊纪念版" >
-                                        </div>
-                                        <div class="pro-name">小米10至尊纪念版</div>
-                                        <div class="pro-price">5299元起</div>
-                                    </a>
-                                </li>
-                                <li class="product">
-                                    <!-- 在新窗口打开 -->
-                                    <a href="" target="_blank">
-                                        <div class="pro-img">
-                                            <img src="//cdn.cnbj1.fds.api.mi-img.com/mi-mall/b11742a0be47f9d97bb6a13ea580018d.png?thumb=1&amp;w=200&amp;h=138&amp;f=webp&amp;q=90" alt="小米10至尊纪念版" >
-                                        </div>
-                                        <div class="pro-name">小米10至尊纪念版</div>
-                                        <div class="pro-price">5299元起</div>
-                                    </a>
-                                </li>
-                                <li class="product">
-                                    <!-- 在新窗口打开 -->
-                                    <a href="" target="_blank">
-                                        <div class="pro-img">
-                                            <img src="//cdn.cnbj1.fds.api.mi-img.com/mi-mall/b11742a0be47f9d97bb6a13ea580018d.png?thumb=1&amp;w=200&amp;h=138&amp;f=webp&amp;q=90" alt="小米10至尊纪念版" >
-                                        </div>
-                                        <div class="pro-name">小米10至尊纪念版</div>
-                                        <div class="pro-price">5299元起</div>
-                                    </a>
-                                </li>
-                                <li class="product">
-                                    <!-- 在新窗口打开 -->
-                                    <a href="" target="_blank">
-                                        <div class="pro-img">
-                                            <img src="//cdn.cnbj1.fds.api.mi-img.com/mi-mall/b11742a0be47f9d97bb6a13ea580018d.png?thumb=1&amp;w=200&amp;h=138&amp;f=webp&amp;q=90" alt="小米10至尊纪念版" >
-                                        </div>
-                                        <div class="pro-name">小米10至尊纪念版</div>
-                                        <div class="pro-price">5299元起</div>
+                                        <div class="pro-name">{{item.name}}</div>
+                                        <div class="pro-price">{{item.price | currency}}</div>
                                     </a>
                                 </li>
                             </ul>
@@ -98,7 +49,64 @@
                     </div>
                     <div class="item-menu">
                         <span>电视</span>
-                        <div class="children"></div>
+                        <div class="children">
+                            <ul>
+                                <li class="product">
+                                    <a href="" target="_blank">
+                                        <div class="pro-img">
+                                            <img src="/imgs/nav-img/nav-3-1.jpg" alt="">
+                                        </div>
+                                        <div class="pro-name">小米壁画电视 65英寸</div>
+                                        <div class="pro-price">6999元</div>
+                                    </a>
+                                </li>
+                                <li class="product">
+                                    <a href="" target="_blank">
+                                        <div class="pro-img">
+                                            <img src="/imgs/nav-img/nav-3-2.jpg" alt="">
+                                        </div>
+                                        <div class="pro-name">小米全面屏电视E55A</div>
+                                        <div class="pro-price">1999元</div>
+                                    </a>
+                                </li>
+                                <li class="product">
+                                    <a href="" target="_blank">
+                                        <div class="pro-img">
+                                            <img src="/imgs/nav-img/nav-3-3.png" alt="">
+                                        </div>
+                                        <div class="pro-name">小米电视4A 32英寸</div>
+                                        <div class="pro-price">699元</div>
+                                    </a>
+                                </li>
+                                <li class="product">
+                                    <a href="" target="_blank">
+                                        <div class="pro-img">
+                                            <img src="/imgs/nav-img/nav-3-4.jpg" alt="">
+                                        </div>
+                                        <div class="pro-name">小米电视4A 55英寸</div>
+                                        <div class="pro-price">1799元</div>
+                                    </a>
+                                </li>
+                                <li class="product">
+                                    <a href="" target="_blank">
+                                        <div class="pro-img">
+                                            <img src="/imgs/nav-img/nav-3-5.jpg" alt="">
+                                        </div>
+                                        <div class="pro-name">小米电视4A 65英寸</div>
+                                        <div class="pro-price">2699元</div>
+                                    </a>
+                                </li>
+                                <li class="product">
+                                    <a href="" target="_blank">
+                                        <div class="pro-img">
+                                            <img src="/imgs/nav-img/nav-3-6.png" alt="">
+                                        </div>
+                                        <div class="pro-name">查看全部</div>
+                                        <div class="pro-price">查看全部</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <div class="header-search">
@@ -114,7 +122,43 @@
 
 <script>
     export default {
-        name: "nav-header"
+        name: "nav-header",
+        data(){
+        	return {
+        		username:'',
+                phoneList:[]
+            }
+        },
+        filter: {
+        	currency(val){
+                if (!val) return '0.00';
+                return '￥' + val.toFixed(2) + '元';
+            }
+        },
+	    mounted() {
+            this.getProductList();
+        },
+        methods:{
+        	login(){
+        		this.$router.push('/login');
+            },
+        	getProductList(){
+        		this.axios.get('/products', {
+        			params:{
+        				categoryId:'100012',
+                        //pageSize:6 // 一次只接受6条数据，但是采用另外一种方式，自行获取前6条数据
+                    }
+                }).then((res) => {
+                	// 超过6条数据则进行截取
+                	if (res.list.length >= 6) {
+                		this.phoneList = res.list.slice(0, 6);
+                    }
+                })
+            },
+            goToCart(){
+        		this.$router.push('/cart');
+            }
+        }
     }
 </script>
 
@@ -200,7 +244,9 @@
                             /*展示子菜单*/
                             color: $colorA;
                             .children{
+                                /*显示下拉菜单*/
                                 height: 220px;
+                                opacity: 1;
                             }
                         }
                         .children{
@@ -208,13 +254,18 @@
                             top: 112px;
                             left: 0;
                             width: 1226px;
+                            /*默认隐藏下拉框*/
+                            height: 0;
+                            opacity: 0;
+                            overflow: hidden;
                             border-top: 1px solid #e5e5e5;
                             /*设置阴影部分*/
                             box-shadow: 0px  7px  6px 0px rgba(0, 0, 0, 0.11);
                             /*覆盖背后的颜色，防止层级关系被遮盖*/
-                            height: 220px;
+                            /*height: 220px;*/
                             z-index: 10;
                             /*background-color: #ffffff;*/
+                            transition: height;
                             .product{
                                 /* 下拉菜单右侧线条相对于product定位 */
                                 position: relative;
