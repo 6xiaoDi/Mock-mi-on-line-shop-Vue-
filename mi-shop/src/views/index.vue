@@ -72,14 +72,16 @@
                     <div class="list-box">
                         <div class="list" v-for="(arr,i) in phoneList" :key="i">
                             <div class="item" v-for="(item,j) in arr" :key="j">
-                                <span>新品</span>
+                                <!--接口未说明新品还是秒杀，这里暂时偶数形式为新品-->
+                                <span v-if="j%2==0" :class="'new-pro'">新品</span>
+                                <span v-else :class="'kill-pro'">秒杀</span>
                                 <div class="item-img">
-                                    <img :src="'/imgs/mi10.jpg'" alt="">
+                                    <img :src="item.mainImage" alt="">
                                 </div>
                                 <div class="item-info">
-                                    <h3>小米9</h3>
-                                    <p>5G双卡全网通，骁龙855</p>
-                                    <p class="price">3999元</p>
+                                    <h3>{{item.name}}</h3>
+                                    <p>{{item.subtitle}}</p>
+                                    <p class="price">{{item.price}}元</p>
                                 </div>
                             </div>
                         </div>
@@ -193,8 +195,28 @@
 					}
 				],
                 // 首页手机列表（二维数组）
-				phoneList:[[1,1,1,1],[1,1,1,1]],
+				phoneList:[],
             }
+        },
+        mounted(){
+            this.init();
+        },
+        methods: {
+	        init(){
+		        this.axios.get('/products',{
+			        params:{
+			        	// 手机品类
+				        categoryId:100012,
+                        // 拉取14条数据
+				        pageSize:14
+			        }
+		        }).then((res)=>{
+		        	// 注意splice和slice的区别，slice不改变原数组
+			        res.list = res.list.slice(6,14);
+			        // 一行四个元素
+			        this.phoneList = [res.list.slice(0,4),res.list.slice(4,8)];
+		        })
+	        }
         }
 	}
 </script>
@@ -333,41 +355,55 @@
                         text-align:center;
                         /*如：新品标记*/
                         span{
-
+                            display:inline-block;
+                            width:67px;
+                            height:24px;
+                            font-size:14px;
+                            line-height:24px;
+                            /*字体白色*/
+                            color:$colorG;
+                            /*新品标签**/
+                            &.new-pro{
+                                background-color:#7ECF68;
+                            }
+                            /*秒杀标签*/
+                            &.kill-pro{
+                                background-color:#E82626;
+                            }
                         }
-                    }
-                    .item-img{
-                        img{
-                            width:100%;
-                            height:195px;
+                        .item-img{
+                            img{
+                                width:100%;
+                                height:195px;
+                            }
                         }
-                    }
-                    .item-info{
-                        /*商品名称*/
-                        h3{
-                            font-size:$fontJ;
-                            color:$colorB;
-                            line-height:$fontJ;
-                            font-weight:bold;
-                        }
-                        /*商品描述*/
-                        p{
-                            color:$colorD;
-                            line-height:13px;
-                            margin:6px auto 13px;
-                        }
-                        /*商品价格*/
-                        .price{
-                            color:#F20A0A;
-                            font-size:$fontJ;
-                            font-weight:bold;
-                            /*变小手，可以点击购物车加购物车*/
-                            cursor:pointer;
-                            &:after{
-                                @include bgImg(22px,22px,'/imgs/icon-cart-hover.png');
-                                content:' ';
-                                margin-left:5px;
-                                vertical-align: middle;
+                        .item-info{
+                            /*商品名称*/
+                            h3{
+                                font-size:$fontJ;
+                                color:$colorB;
+                                line-height:$fontJ;
+                                font-weight:bold;
+                            }
+                            /*商品描述*/
+                            p{
+                                color:$colorD;
+                                line-height:13px;
+                                margin:6px auto 13px;
+                            }
+                            /*商品价格*/
+                            .price{
+                                color:#F20A0A;
+                                font-size:$fontJ;
+                                font-weight:bold;
+                                /*变小手，可以点击购物车加购物车*/
+                                cursor:pointer;
+                                &:after{
+                                    @include bgImg(22px,22px,'/imgs/icon-cart-hover.png');
+                                    content:' ';
+                                    margin-left:5px;
+                                    vertical-align: middle;
+                                }
                             }
                         }
                     }
