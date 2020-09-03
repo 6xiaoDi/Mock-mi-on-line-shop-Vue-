@@ -1,0 +1,59 @@
+.modal{
+	@include position(fixed);
+	z-index: 10;
+	transition: all .5s;
+	// 遮盖全屏
+	.mask{
+		@include position(fixed);
+		background-color: $colorI;
+		opacity: .5;
+	}
+	// 主要vue动画样式顺序有要求，否则部分失效（激活放在上面，进入放在离开上面）
+	// 进入之后
+	&.slide-enter-active{
+		top:0;
+	}
+	// 关闭之后
+	&.slide-leave-active{
+		top:-100%;
+	}
+	// 进入之前，看不到
+	&.slide-enter{
+		top:-100%;
+	}
+	.modal-dialog{
+		// 稍微往上偏一点
+		@include position(absolute, 40%, 50%, 660px, aotu);
+		background-color: $colorG;
+		// 如何使对话框居中？（常见面试题）位移
+		transform: translate(-50%, -50%);
+		.modal-header{
+			height: 60px;
+			background-color: $colorG;
+			padding: 0 25px;
+			line-height: 60px;
+			font-size: $fontI;
+			.icon-close{
+				@include positionImg(absolute,26px,25px,14px,14px,'/imgs/icon-close.png');
+				// 放大效果动画
+				transition: transform .3s;
+				&:hover{
+					// 放大效果
+					transform: scale(1.5);
+				}
+			}
+		}
+		// 主要嵌套文本
+		.modal-body{
+			padding:42px 40px 54px;
+			font-size:14px;
+		}
+		// 底部按钮区
+		.modal-footer{
+			height: 82px;
+			line-height: 82px;
+			text-align: center;
+			background-color: $colorJ;
+		}
+	}
+}

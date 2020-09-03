@@ -81,7 +81,7 @@
                                 <div class="item-info">
                                     <h3>{{item.name}}</h3>
                                     <p>{{item.subtitle}}</p>
-                                    <p class="price">{{item.price}}元</p>
+                                    <p class="price" @click="addCart(item.id)">{{item.price}}元</p>
                                 </div>
                             </div>
                         </div>
@@ -90,12 +90,25 @@
             </div>
         </div>
         <ServiceBar></ServiceBar>
+        <Modal
+                title="提示"
+                sureText="查看购物车"
+                btnType="1"
+                modalType="middle"
+                :showModal="showModal"
+                @submit="goToCart"
+                @cancel="showModal=false"
+        >
+            <template v-slot:body>
+                <p>商品添加成功！</p>
+            </template>
+        </Modal>
     </div>
 </template>
 
 <script>
 	import ServiceBar from "../components/ServiceBar";
-	// import 'swiper/dist/css/swiper.css'
+	import Modal from "../components/Modal";
 	import 'swiper/swiper-bundle.css'
 	import { swiper, swiperSlide } from 'vue-awesome-swiper'
 	export default {
@@ -103,7 +116,8 @@
 		components:{
 			swiper,
 			swiperSlide,
-			ServiceBar
+			ServiceBar,
+			Modal
 		},
         data(){
 			return {
@@ -196,6 +210,8 @@
 				],
                 // 首页手机列表（二维数组）
 				phoneList:[],
+                // 默认不显示购物车提示弹框
+				showModal:false
             }
         },
         mounted(){
@@ -212,10 +228,24 @@
 			        }
 		        }).then((res)=>{
 		        	// 注意splice和slice的区别，slice不改变原数组
+                    // 后台接口前6张照片是给首页导航菜单用的，因此图片尺寸对于此处不合适，我们取后面的数据
 			        res.list = res.list.slice(6,14);
 			        // 一行四个元素
 			        this.phoneList = [res.list.slice(0,4),res.list.slice(4,8)];
 		        })
+	        },
+	        addCart(id){
+		        this.showModal = true;
+		        // this.axios.post('/carts',{
+			    //     productId:id,
+			    //     selected: true
+		        // }).then(()=>{
+		        // }).catch(()=>{
+			    //     this.showModal = true;
+		        // });
+	        },
+	        goToCart(){
+		        this.$router.push('/cart');
 	        }
         }
 	}
