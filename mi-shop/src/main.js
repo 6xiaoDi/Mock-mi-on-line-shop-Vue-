@@ -3,6 +3,7 @@ import router from './router'
 import axios from 'axios'
 import VueAxios from "vue-axios";
 import VueLazyload from "vue-lazyload";
+import VueCookie from "vue-cookie"
 import App from './App.vue'
 // import env from './env/env'
 
@@ -35,11 +36,14 @@ axios.interceptors.response.use(function (response) {
 	//	错位拦截
 	}else{
 		alert(res.msg);
+		// 报错之后不希望promise返回成功，而是抛出问题
+		return Promise.reject();
 	}
 });
 
 
 Vue.use(VueAxios,axios);
+Vue.use(VueCookie);
 // 配置图片懒加载
 Vue.use(VueLazyload,{
 	// 条状的

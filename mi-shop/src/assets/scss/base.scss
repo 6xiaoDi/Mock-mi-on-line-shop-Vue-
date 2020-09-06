@@ -1,4 +1,6 @@
 .container{
+	// 方便安全区内的元素绝对地位，相对于它对齐
+	position: relative;
 	width: 1226px;
 	/*保证居中*/
 	margin-right: auto;
@@ -10,4 +12,11 @@ a{
 		width: 100%;
 		height: 100%;
 	}
+}
+input{
+	// 不显示外部边线
+	outline: none;
+	// 内边距不占位置，不采用标准盒模型
+	box-sizing: border-box;
+	font-size: 14px;
 }
