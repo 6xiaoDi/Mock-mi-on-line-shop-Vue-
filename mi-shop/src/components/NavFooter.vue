@@ -1,7 +1,7 @@
 <template>
     <div class="footer">
         <div class="footer-logo">
-            <img src="/imgs/logo-footer.png" alt="">
+            <img v-lazy="'/imgs/logo-footer.png'" alt="">
             <p>小米商城</p>
         </div>
         <div class="footer-link">

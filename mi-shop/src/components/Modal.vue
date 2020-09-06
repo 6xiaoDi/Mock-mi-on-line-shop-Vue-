@@ -6,7 +6,7 @@
             <!--弹框-->
             <div class="modal-dialog">
                 <div class="modal-header">
-                    <span>标题</span>
+                    <span>{{title}}</span>
                     <a href="javascript:;" class="icon-close" @click="$emit('cancel')"></a>
                 </div>
                 <div class="modal-body">
