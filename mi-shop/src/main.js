@@ -26,13 +26,18 @@ axios.defaults.timeout = 8000; // 不设置的话，体验很差
 // 对错误进行拦截，不做请求拦截，因为商场系统没有太多表单，即没有过多参数处理，主要处理接口返回值
 axios.interceptors.response.use(function (response) {
 	let res = response.data;
+	let path = location.hash;
 	// 成功
 	if (res.status === 0) {
 		return res.data;
 	//	未登录
 	}else if (res.status === 10) {
-		// 跳转到登录界面（在vue实例中才能用路由，这里不行）
-		window.location.href = '/#/login';
+		// 非首页的话，需要登录才行
+		if (path !== '#/index') {
+			// 跳转到登录界面（在vue实例中才能用路由，这里不行）
+			window.location.href = '/#/login';
+		}
+
 	//	错位拦截
 	}else{
 		alert(res.msg);
