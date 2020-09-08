@@ -50,6 +50,7 @@
 			}
 		},
 		methods:{
+			...mapActions(['saveUserName']),
 			login(){
 				let { username,password } = this;
 				// 调用后台接口
@@ -61,7 +62,11 @@
 					// 接收后台数据
                     // Cookie 暂时设置一个月过期
 					this.$cookie.set('userId',res.id,{expires:'1M'});
-					// to-do 保存用户名
+					// 保存用户名
+                    // 一般用法
+                    // this.$store.dispatch('saveUserName', res.username);
+                    // mapActions用法
+                    this.saveUserName(res.username);
 					// 回到首页
 					this.$router.push('index');
 					// this.$router.push({
