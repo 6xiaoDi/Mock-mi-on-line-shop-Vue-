@@ -44,7 +44,7 @@
                 <swiper :options="swiperOptions">
                     <swiper-slide v-for="(item,index) in slideList" :key='index'>
                         <!-- 每张图可以跳转 -->
-                        <a :href="'/#/product' + item.id"><img :src="item.img"></a>
+                        <a :href="'/#/product/' + item.id"><img :src="item.img"></a>
                     </swiper-slide>
                     <div class="swiper-pagination"  slot="pagination"></div>
                     <div class="swiper-button-prev" slot="button-prev"></div>
@@ -196,13 +196,13 @@
 				adsList:[
 					{
 						id:33,
-						img:'/imgs/ads/ads-1.jpg'
+						img:'/imgs/ads/ads-1.png'
 					},{
 						id:48,
 						img:'/imgs/ads/ads-2.jpg'
 					},{
 						id:45,
-						img:'/imgs/ads/ads-3.jpg'
+						img:'/imgs/ads/ads-3.png'
 					},{
 						id:47,
 						img:'/imgs/ads/ads-4.jpg'

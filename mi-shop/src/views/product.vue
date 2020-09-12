@@ -8,19 +8,19 @@
         </product-param>
         <div class="content">
             <div class="item-bg">
-                <h2>小米10</h2>
-                <h3>10周期旗舰机</h3>
+                <h2>{{product.name}}</h2>
+                <h3>{{product.subtitle}}</h3>
                 <p>
-                    <a href="" id="">十年献礼，巅峰美学</a>
+                    <a href="" id="">全球首款双频 GP</a>
                     <span>|</span>
-                    <a href="" id="">骁龙865</a>
+                    <a href="" id="">骁龙845</a>
                     <span>|</span>
-                    <a href="" id="">16GB + 512GB</a>
+                    <a href="" id="">AI 变焦双摄</a>
                     <span>|</span>
-                    <a href="" id="">120倍 超长焦微光相机</a>
+                    <a href="" id="">红外人脸识别</a>
                 </p>
                 <div class="price">
-                    <span>￥<em>3999</em></span>
+                    <span>￥<em>{{product.price}}</em></span>
                 </div>
             </div>
             <div class="item-bg-2"></div>
@@ -113,7 +113,6 @@
             .item-bg{
                 background:url('/imgs/product/product-bg-1.png') no-repeat center;
                 height:718px;
-                color: white;
                 text-align:center;
                 h2{
                     font-size:80px;
@@ -128,7 +127,7 @@
                     margin-bottom:40px;
                     a{
                         font-size:16px;
-                        color:#ffffff;
+                        color:#333333;
                     }
                     span{
                         margin:0 15px;
@@ -145,9 +144,8 @@
             }
             .item-bg-2{
                 background:url(/imgs/product/product-bg-2.png) no-repeat center;
-                height:580px;
+                height:480px;
                 background-size:1226px 397px;
-                background-size:100% 100%;
             }
             .item-bg-3{
                 background:url(/imgs/product/product-bg-3.png) no-repeat center;
