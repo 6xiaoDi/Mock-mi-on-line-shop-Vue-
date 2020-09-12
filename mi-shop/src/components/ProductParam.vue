@@ -52,6 +52,8 @@
         line-height:70px;
         border-top:1px solid $colorH;
         background-color:$colorG;
+        /*尽量控制层次不要影响其他的子元素*/
+        z-index: 10;
         &.is_fixed{
             position:fixed;
             top:0;

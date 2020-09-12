@@ -38,6 +38,8 @@ axios.interceptors.response.use(function (response) {
 			// 跳转到登录界面（在vue实例中才能用路由，这里不行）
 			window.location.href = '/#/login';
 		}
+		// 报错之后不希望promise返回成功，而是抛出问题
+		return Promise.reject();
 
 	//	错位拦截
 	}else{
