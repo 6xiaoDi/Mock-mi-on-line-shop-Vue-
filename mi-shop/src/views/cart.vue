@@ -9,7 +9,7 @@
             <div class="container">
                 <div class="cart-box">
                     <ul class="cart-item-head">
-                        <li class="col-1"><span class="checkbox" v-bind:class="{'checked':allChecked}"></span>全选</li>
+                        <li class="col-1"><span class="checkbox" :class="{'checked':allChecked}" @click="toggleAll"></span>全选</li>
                         <li class="col-3">商品名称</li>
                         <li class="col-1">单价</li>
                         <li class="col-2">数量</li>
@@ -19,7 +19,7 @@
                     <ul class="cart-item-list">
                         <li class="cart-item" v-for="(item) in list" :key="item.productId">
                             <div class="item-check">
-                                <span class="checkbox" :class="{'checked':item.productSelected}" ></span>
+                                <span class="checkbox" :class="{'checked':item.productSelected}"  ></span>
                             </div>
                             <div class="item-name">
                                 <img v-lazy="item.productMainImage" alt="">
@@ -30,7 +30,7 @@
                                 <div class="num-box">
                                     <a href="javascript:;">-</a>
                                     <span>{{item.quantity}}</span>
-                                    <a href="javascript:;">+</a>
+                                    <a href="javascript:;"  >+</a>
                                 </div>
                             </div>
                             <div class="item-total">{{item.productTotalPrice}}</div>
@@ -45,7 +45,7 @@
                     </div>
                     <div class="total fr">
                         合计：<span>{{cartTotalPrice}}</span>元
-                        <a href="javascript:;" class="btn">去结算</a>
+                        <a href="javascript:;" class="btn" >去结算</a>
                     </div>
                 </div>
             </div>
@@ -80,6 +80,15 @@
 			// 获取购物车列表
 			getCartList(){
 				this.axios.get('/carts').then((res)=>{
+					this.renderData(res);
+				})
+			},
+			// 控制全选功能
+			toggleAll(){
+				// 切换全选状态
+				let url = this.allChecked?'/carts/unSelectAll':'/carts/selectAll';
+				this.axios.put(url).then((res)=>{
+					// 重新渲染（全选按钮也需要重新变化）
 					this.renderData(res);
 				})
 			},
