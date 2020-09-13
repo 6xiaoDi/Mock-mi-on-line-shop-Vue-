@@ -16,8 +16,11 @@
             }
         },
         mounted() {
-            this.getUser();
-            this.getCartCount();
+    		// 没登录的时候，没必要获取用户信息和购物车数量——优化性能
+    		if (this.$cookie.get('userId')){
+			    this.getUser();
+			    this.getCartCount();
+            }
         },
         methods:{
 	        getUser(){

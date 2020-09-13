@@ -61,20 +61,22 @@
 				}).then((res)=>{
 					// 接收后台数据
                     // Cookie 暂时设置一个月过期
-					this.$cookie.set('userId',res.id,{expires:'1M'});
+					this.$cookie.set('userId',res.id,{expires:'Session'});
 					// 保存用户名
                     // 一般用法
                     // this.$store.dispatch('saveUserName', res.username);
                     // mapActions用法
                     this.saveUserName(res.username);
 					// 回到首页
-					this.$router.push('index');
-					// this.$router.push({
-					// 	name:'index',
-					// 	params:{
-					// 		from:'login'
-					// 	}
-					// });
+					// this.$router.push('index');
+					this.$router.push({
+						name:'index',
+                        // query 明文传参，会导致进入登录页面的url多了参数内容，没有任何意义
+                        // 这里换成params传参
+						params:{
+							from:'login'
+						}
+					});
 				})
 			},
 			register(){
