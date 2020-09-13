@@ -4,6 +4,9 @@ import axios from 'axios'
 import VueAxios from "vue-axios";
 import VueLazyload from "vue-lazyload";
 import VueCookie from "vue-cookie"
+import { Message } from 'element-ui'
+// 注意elementUI的样式必须引入，否则所有的交互和样式都不会生效的
+import 'element-ui/lib/theme-chalk/index.css'
 import store from "./store";
 import App from './App.vue'
 // import env from './env/env'
@@ -39,11 +42,12 @@ axios.interceptors.response.use(function (response) {
 			window.location.href = '/#/login';
 		}
 		// 报错之后不希望promise返回成功，而是抛出问题
+		Message.warning(res.msg);
 		return Promise.reject();
 
 	//	错位拦截
 	}else{
-		alert(res.msg);
+		Message.error(res.data.message);
 		// 报错之后不希望promise返回成功，而是抛出问题
 		return Promise.reject();
 	}
@@ -57,6 +61,7 @@ Vue.use(VueLazyload,{
 	// 条状的
 	loading:'/imgs/loading-svg/loading-bars.svg'
 })
+Vue.prototype.$message = Message;
 Vue.config.productionTip = false
 
 new Vue({
