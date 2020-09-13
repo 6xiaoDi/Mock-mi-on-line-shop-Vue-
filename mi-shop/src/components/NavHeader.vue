@@ -211,34 +211,6 @@
                 position: relative;
                 height: 112px;
                 @include flex();
-                .header-logo{
-                    display: inline-block;
-                    width: 55px;
-                    height: 55px;
-                    background-color: #FF6600;
-                    a{
-                        display: inline-block;
-                        /*两张图片完整放入，外部是相框，里面是相册 宽度*2*/
-                        width: 110px;
-                        height: 55px;
-                        /*  scss生成伪类  */
-                        &:before{
-                            content: "";
-                            @include bgImg(55px,55px,"/imgs/mi-logo.png");
-                            transition: margin .2s;
-                        }
-                        &:after{
-                            /*content是占位的，必须加*/
-                            content: "";
-                            @include bgImg(55px,55px,"/imgs/mi-home.png");
-                        }
-                        &:hover:before{
-                            margin-left: -55px;
-                            /*指定margin进行过渡*/
-                            transition: margin .2s;
-                        }
-                    }
-                }
                 .header-menu{
                     display: inline-block;
                     width: 643px;
