@@ -268,7 +268,7 @@
 				this.checkedItem = {};
 				this.userAction = '';
 				this.showDelModal = false;
-				// this.showEditModal = false;
+				this.showEditModal = false;
 			},
 			getCartList(){
 				this.axios.get('/carts').then((res)=>{
