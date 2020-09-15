@@ -65,24 +65,6 @@
                             @current-change="handleChange"
                     >
                     </el-pagination>
-                    <!--当前页面继续往后加载列表数据-->
-                    <div class="load-more" v-if="false">
-                        <el-button type="primary" :loading="loading" @click="loadMore">加载更多</el-button>
-                    </div>
-                    <!--滚动加载数据-->
-                    <!--
-                        v-infinite-scroll="scrollMore"  滚动调用scrollMore方法
-                        infinite-scroll-disabled  滚动是否禁用
-                        infinite-scroll-distance 距离底部多远触发
-                    -->
-                    <div class="scroll-more"
-                         v-infinite-scroll="scrollMore"
-                         infinite-scroll-disabled="busy"
-                         infinite-scroll-distance="410"
-                         v-if="false"
-                    >
-                        <img src="/imgs/loading-svg/loading-spinning-bubbles.svg" alt="" v-show="loading">
-                    </div>
                     <!--当数据没有的时候显示nodata组件-->
                     <no-data v-if="!loading && list.length === 0"></no-data>
                 </div>
@@ -94,8 +76,7 @@
 	import OrderHeader from './../components/OrderHeader'
 	import Loading from './../components/Loading'
 	import NoData from './../components/NoData'
-	import { Pagination,Button } from 'element-ui'
-	import infiniteScroll from 'vue-infinite-scroll'
+	import { Pagination } from 'element-ui'
 	export default{
 		name:'order-list',
 		components:{
@@ -104,12 +85,7 @@
 			NoData,
             // [] 动态解析一个变量值成字符串
             // el-pagination 对应 Pagination.name，否则直接使用Pagination
-			[Pagination.name]:Pagination.name,
-			[Button.name]:Button
-		},
-        // 自定义指令：滚动加载
-		directives: {
-			infiniteScroll
+			[Pagination.name]:Pagination,
 		},
 		data(){
 			return {
@@ -117,9 +93,7 @@
 				list:[], // 订单列表
 				pageSize:10,
 				pageNum:1, // 当前页
-				total:0,
-				showNextPage:true,//加载更多：是否显示按钮
-				busy:false,//滚动加载，是否触发
+				total:0
 			}
 		},
 		mounted(){
@@ -128,7 +102,6 @@
 		methods:{
 			getOrderList(){
 				this.loading = true;
-				this.busy = true;
 				// 拉取前10条数据
 				this.axios.get('/orders',{
 					params:{
@@ -138,10 +111,7 @@
 				}).then((res)=>{
 					this.loading = false;
 					this.list = res.list; // 适用于分页
-					// this.list = this.list.concat(res.list); // 适用于动态加载，不能覆盖之前的数据
 					this.total = res.total;
-					this.showNextPage = res.hasNextPage;
-					this.busy = false;
 				}).catch(()=>{
 					this.loading = false;
 				})
@@ -164,44 +134,11 @@
 					}
 				})
 			},
-			// 第一种方法：分页器
+			// 分页器
 			handleChange(pageNum){
 				this.pageNum = pageNum;  // 当前页数
 				this.getOrderList();
-			},
-			// 第二种方法：加载更多按钮
-			loadMore(){
-				this.pageNum++;
-				this.getOrderList();
-			},
-			// 第三种方法：滚动加载，通过npm插件实现
-			scrollMore(){
-				// 触发事件滚动加载禁用，防止无限次调用该方法，否则性能受到严重影响
-				this.busy = true;
-				setTimeout(()=>{
-					this.pageNum++;
-					this.getList();
-				},500);
-			},
-			// 专门给scrollMore使用
-			getList(){
-				this.loading = true;
-				this.axios.get('/orders',{
-					params:{
-						pageSize:10,
-						pageNum:this.pageNum
-					}
-				}).then((res)=>{
-					this.list = this.list.concat(res.list);
-					this.loading = false;
-					// 是否有下一页
-					if (res.hasNextPage) {
-						this.busy=false;
-					} else {
-						this.busy=true;
-					}
-				});
-			},
+			}
 		}
 	}
 </script>
