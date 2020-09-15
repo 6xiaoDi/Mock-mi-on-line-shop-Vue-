@@ -36,6 +36,9 @@ axios.interceptors.response.use(function (response) {
 	if (res.status === 0) {
 		return res.data;
 	//	未登录
+	}else if (res.status === 1){
+		Message.warning(res.msg);
+		return Promise.reject();
 	}else if (res.status === 10) {
 		// 非首页的话，需要登录才行
 		if (path !== '#/index') {
@@ -45,7 +48,6 @@ axios.interceptors.response.use(function (response) {
 		// 报错之后不希望promise返回成功，而是抛出问题
 		Message.warning(res.msg);
 		return Promise.reject();
-
 	//	错位拦截
 	}else{
 		Message.error(res.data.message);

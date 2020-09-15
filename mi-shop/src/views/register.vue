@@ -1,26 +1,25 @@
 <template>
-    <div class="login">
+    <div class="register">
         <div class="container">
             <a href="/#/index"><img src="/imgs/login-logo.png" alt=""></a>
         </div>
         <div class="wrapper">
             <div class="container">
-                <div class="login-form">
+                <div class="register-form">
                     <h3>
-                        <span class="checked">帐号登录</span><span class="sep-line">|</span><span>扫码登录</span>
+                        <span class="checked">注册账号</span>
                     </h3>
                     <div class="input">
-                        <input type="text" placeholder="请输入帐号" v-model="username">
+                        <input type="text" placeholder="请输入用户名" v-model="username">
                     </div>
                     <div class="input">
-                        <input type="password" placeholder="请输入密码" v-model="password">
+                        <input type="password" placeholder="请输入密码" v-model="password1">
+                    </div>
+                    <div class="input">
+                        <input type="password" placeholder="请再次输入密码" v-model="password">
                     </div>
                     <div class="btn-box">
-                        <a href="javascript:;" class="btn" @click="login">登录</a>
-                    </div>
-                    <div class="tips">
-                        <div class="sms" @click="register">手机短信登录/注册</div>
-                        <div class="reg" @click="register">立即注册<span>|</span>忘记密码？</div>
+                        <a href="javascript:;" class="btn" @click="register">注册</a>
                     </div>
                 </div>
             </div>
@@ -37,15 +36,17 @@
         </div>
     </div>
 </template>
+
 <script>
 	import { mapActions } from 'vuex';
 	export default {
-		name: 'login',
+		name: 'register',
 		data(){
 			return {
 				username:'',
 				password:'',
-                // 前端与后端交流的凭证（cookie发送服务端），这里没用token
+				password1:'',
+				// 前端与后端交流的凭证（cookie发送服务端），这里没用token
 				userId:''
 			}
 		},
@@ -60,19 +61,19 @@
 					password
 				}).then((res)=>{
 					// 接收后台数据
-                    // Cookie 暂时设置一个月过期
+					// Cookie 暂时设置一个月过期
 					this.$cookie.set('userId',res.id,{expires:'Session'});
 					// 保存用户名
-                    // 一般用法
-                    // this.$store.dispatch('saveUserName', res.username);
-                    // mapActions用法
-                    this.saveUserName(res.username);
+					// 一般用法
+					// this.$store.dispatch('saveUserName', res.username);
+					// mapActions用法
+					this.saveUserName(res.username);
 					// 回到首页
 					// this.$router.push('index');
 					this.$router.push({
 						name:'index',
-                        // query 明文传参，会导致进入登录页面的url多了参数内容，没有任何意义
-                        // 这里换成params传参
+						// query 明文传参，会导致进入登录页面的url多了参数内容，没有任何意义
+						// 这里换成params传参
 						params:{
 							from:'login'
 						}
@@ -80,13 +81,31 @@
 				})
 			},
 			register(){
-				this.$router.push('/register');
+				let errMsg='';
+				if (!this.username) {
+					errMsg = '用户名不能为空';
+                } else if (this.password !== this.password1) {
+					errMsg = '两次密码不一致';
+                }
+				if(errMsg){
+					this.$message.error(errMsg);
+					return;
+				}
+				// 调用后台注册接口
+				this.axios.post('/user/register',{
+					username: this.username,
+					password: this.password,
+					email:'xxxd@163.com'
+				}).then(()=>{
+					this.$message.success('注册成功');
+					this.login();
+				})
 			}
 		}
 	}
 </script>
 <style lang="scss">
-    .login{
+    .register{
         &>.container{
             height:113px;
             img{
@@ -98,7 +117,7 @@
             background:url('/imgs/login-bg.jpg') no-repeat center;
             .container{
                 height:576px;
-                .login-form{
+                .register-form{
                     box-sizing: border-box;
                     padding-left: 31px;
                     padding-right: 31px;
