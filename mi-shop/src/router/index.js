@@ -1,17 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/home'
-import Register from '../views/register'
-import Login from  "../views/login"
 import Index from '../views/index'
-import Product from '../views/product'
-import Detail from '../views/detail'
-import Cart from '../views/cart'
-import Order from '../views/order'
-import OrderList from '../views/orderList'
-import OrderConfirm from  '../views/orderConfirm'
-import OrderPay from "../views/orderPay";
-import Alipay from "../views/aliPay"
+
 
 Vue.use(VueRouter) // 加载插件
 
@@ -29,58 +20,56 @@ const routes = [
             }, {
                 path: 'product/:id',
                 name: 'product',
-                component: Product
+                component: () => import('../views/product.vue')
             }, {
                 path: 'detail/:id',
                 name: 'detail',
-                component: Detail
+                component: () => import('../views/detail.vue')
             },
         ]
     },
     {
         path: '/login',
         name:'login',
-        component: Login
+        component: () => import('../views/login.vue')
     },
     {
         path: '/register',
         name:'register',
-        component: Register
+        component: () => import('../views/register.vue')
     },
     {
         path: '/cart',
         name:'cart',
-        component: Cart
+        component: () => import('../views/cart.vue')
     },
     {
         path: '/order',
         name: 'order',
-        component: Order,
+        component: () => import('../views/order.vue'),
         children: [
             {
                 path: 'list',
                 name: 'order-list',
-                component: OrderList
+                component: () => import('../views/orderList.vue')
             }, {
                 path: 'confirm',
                 name: 'order-confirm',
-                component: OrderConfirm
+                component: () => import('../views/orderConfirm.vue')
             }, {
                 path: 'pay',
                 name: 'order-pay',
-                component: OrderPay
+                component: () => import('../views/orderPay.vue')
             }, {
                 path: 'alipay',
                 name: 'alipay',
-                component: Alipay
+                component: () => import('../views/aliPay.vue')
             }
         ]
     }
 ]
 
 const router = new VueRouter({
-    // mode: 'history',
-    // base: process.env.BASE_URL,
     routes
 })
 
