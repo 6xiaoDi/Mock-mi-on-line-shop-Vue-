@@ -28,6 +28,7 @@ axios.defaults.timeout = 8000; // 不设置的话，体验很差
 // axios.defaults.baseURL = env.baseURL;
 
 // 对错误进行拦截，不做请求拦截，因为商场系统没有太多表单，即没有过多参数处理，主要处理接口返回值
+// 第一个参数function是拦截业务的，第二个参数function是拦截http状态码的
 axios.interceptors.response.use(function (response) {
 	let res = response.data;
 	let path = location.hash;
@@ -51,6 +52,10 @@ axios.interceptors.response.use(function (response) {
 		// 报错之后不希望promise返回成功，而是抛出问题
 		return Promise.reject();
 	}
+},(error) => {
+	let res = error.response;
+	Message.error(res.data.message);
+	return Promise.reject(error);
 });
 
 
