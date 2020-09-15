@@ -12,11 +12,7 @@ module.exports = {
       }
     }
   },
-  // publicPath:'/app',
-  // outputDir:'dist',
-  // indexPath:'index2.html',
-  // lintOnSave:false,
-  productionSourceMap:true,
+  productionSourceMap:false,
   // 清除prefetch防止预加载，优化路由懒加载
   chainWebpack:(config)=>{
     config.plugins.delete('prefetch');

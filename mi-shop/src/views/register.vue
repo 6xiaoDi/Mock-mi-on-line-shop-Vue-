@@ -18,6 +18,9 @@
                     <div class="input">
                         <input type="password" placeholder="请再次输入密码" v-model="password">
                     </div>
+                    <div class="input">
+                        <input type="text" placeholder="请输入email" v-model="email">
+                    </div>
                     <div class="btn-box">
                         <a href="javascript:;" class="btn" @click="register">注册</a>
                     </div>
@@ -46,6 +49,7 @@
 				username:'',
 				password:'',
 				password1:'',
+                email:'',
 				// 前端与后端交流的凭证（cookie发送服务端），这里没用token
 				userId:''
 			}
@@ -95,7 +99,7 @@
 				this.axios.post('/user/register',{
 					username: this.username,
 					password: this.password,
-					email:'xxxd@163.com'
+					email:this.email
 				}).then(()=>{
 					this.$message.success('注册成功');
 					this.login();
