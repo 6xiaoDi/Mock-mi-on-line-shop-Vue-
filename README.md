@@ -51,13 +51,13 @@ qrcode：生成二维码插件。
 **注意：由于涉及大量的 ES6/7 等新属性，node 需要 6.0 以上版本**
 
 ```
-git clone https://github.com/bailicangdu/vue2-elm.git  
+git clone https://github.com/6xiaoDi/Mock-mi-on-line-shop-Vue-.git
 
-cd vue2-elm
+cd mi-shop
 
 npm install 或 yarn(推荐)
 
-npm run dev
+npm run serve
 ```
 
 
