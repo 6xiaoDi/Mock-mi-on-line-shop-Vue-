@@ -62,6 +62,18 @@ npm run serve
 
 
 
+# 测试账号
+
+> admin1
+>
+> admin1
+
+> jack
+>
+> jack
+
+
+
 # 效果演示
 
 [建议使用chrome浏览器浏览](http://www.linyousishu.cn)
